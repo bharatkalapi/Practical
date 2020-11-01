@@ -1,0 +1,238 @@
+package stepDefination;
+
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
+import java.io.File;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.LocalFileDetector;
+import org.openqa.selenium.remote.RemoteWebElement;
+
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+public class sendemailsteps {
+	
+	
+    WebDriver driver;
+
+	
+	@Given("^open url and signin to email account$")
+	public void open_url_and_signin_to_email_account() throws InterruptedException 
+	{
+		System.setProperty("webdriver.chrome.driver","/Users/bhirani/Downloads/chromedriver");
+				
+				driver = new ChromeDriver();
+				driver.manage().window().maximize();
+				//driver.navigate().to("https://accounts.google.com/AccountChooser?service=mail&continue=https://mail.google.com/mail/");
+				driver.navigate().to("https://accounts.google.com/signin/v2/identifier?continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&service=mail&sacu=1&rip=1&flowName=GlifWebSignIn&flowEntry=ServiceLogin");
+				Thread.sleep(2000);
+				driver.findElement(By.name("identifier")).sendKeys("qatestpractical@gmail.com");
+				driver.findElement(By.name("identifier")).sendKeys(Keys.ENTER);
+				Thread.sleep(3000);
+				driver.findElement(By.name("password")).sendKeys("AhanaB@123");
+				driver.findElement(By.name("password")).sendKeys(Keys.ENTER);
+				Thread.sleep(10000);
+	}
+
+	@When("^click on compose function, add to, subject, body$")
+	public void click_on_compose_function_add_to_subject_body() throws InterruptedException 
+	{
+		
+		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+		//Clicking on Compose function
+		JavascriptExecutor js = (JavascriptExecutor) driver;  
+        js.executeScript("document.querySelector(\"div[class='T-I T-I-KE L3']\").click();");
+
+		//Adding Email address in TO field
+        driver.findElement(By.cssSelector("div.wO.nr.l1:nth-child(1) > textarea")).sendKeys("qatestpractical@gmail.com");
+        Thread.sleep(5000);
+        //Adding subject line for email to be sent
+        driver.findElement(By.name("subjectbox")).sendKeys("Sending Attachment Through Email");
+		
+        //Adding body text
+        WebElement element = driver.findElement(By.xpath("//div[@class='Ar Au']//div"));
+        element.click();
+        element.sendKeys("Hey! there, /n Please find attached attachment");
+ //       Thread.sleep(3000);
+
+//        js.executeScript("document.querySelector('div.Am.Al.editable.LW-avf.tS-tW').click();");
+//        Thread.sleep(3000);
+  //      js.executeScript("document.querySelector('div.Am.Al.editable.LW-avf.tS-tW').innerHTML = \"<div>Hey! there, Please find attached attachment</div>\"");
+
+        Thread.sleep(5000);
+
+
+       // document.querySelector("div[class='a1 aaA aMZ']").click();
+
+		//document.querySelector("div[class='T-I T-I-KE L3']")
+
+//		driver.findElement(By.xpath("//div[contains(text(),'Compose')]")).click();
+//
+//        Thread.sleep(5000);
+//        driver.findElement(By.xpath("//textarea[@name='to']")).sendKeys("qatestpractical@gmail.com");
+//
+//        driver.findElement(By.xpath("//input[@name='subjectbox']")).sendKeys("SendingAttachmentThroughEmail");
+//
+//        Thread.sleep(5000);
+//
+//        WebElement element = driver.findElement(By.xpath("//div[@class='Ar Au']//div"));
+//        element.click();
+//        element.sendKeys("Hey! there, /n Please find attached attachment");
+//        Thread.sleep(3000);
+	}
+
+	@Then("^add an attachment and send an email and close the browser$")
+	public void add_an_attachment_and_send_an_email_and_close_the_browser() throws InterruptedException, AWTException 
+	{
+//		
+		//driver.findElement(By.id(":9b")).click();
+		
+		WebElement element = driver.findElement(By.id(":9b"));
+		element.click();
+		Thread.sleep(3000);
+		
+		Robot robot = new Robot(); 
+		
+		robot.keyPress(KeyEvent.VK_META);
+		
+			robot.keyPress(KeyEvent.VK_TAB);
+
+			robot.keyRelease(KeyEvent.VK_META);
+
+			robot.keyRelease(KeyEvent.VK_TAB);
+			
+			element.sendKeys("/Users/bhirani/Downloads/wsp/practical/src/main/java/resources/selenium.jpeg");
+
+			
+			robot.keyPress(KeyEvent.VK_ENTER);
+			robot.keyRelease(KeyEvent.VK_ENTER);
+			
+		element.sendKeys("/Users/bhirani/Downloads/wsp/practical/src/main/java/resources/selenium.jpeg");
+		
+	//	File file = new File("/Users/bhirani/selenium.jpeg");
+		//StringSelection stringSelection= new StringSelection(file.getAbsolutePath());
+		
+//		StringSelection strSelection = new StringSelection("/Users/bhirani/selenium.jpeg");
+//		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+//		clipboard.setContents(strSelection, null);
+//		
+//		Robot robot = new Robot(); 
+//		//robot.setAutoDelay(2000);
+//		robot.keyPress(KeyEvent.VK_META);
+//		 
+//		robot.keyPress(KeyEvent.VK_SHIFT);
+//		 
+//		robot.keyPress(KeyEvent.VK_G);
+//		 
+//		robot.keyRelease(KeyEvent.VK_META);
+//		 
+//		robot.keyRelease(KeyEvent.VK_SHIFT);
+//		 
+//		robot.keyRelease(KeyEvent.VK_G);
+//		
+//		element.sendKeys("/Users/bhirani/selenium.jpeg");
+//
+//		robot.keyRelease(KeyEvent.VK_META);
+//		
+//		robot.keyRelease(KeyEvent.VK_V);
+		
+//		File file = new File("/Users/bhirani/selenium.jpeg");
+//		StringSelection stringSelection= new StringSelection(file.getAbsolutePath());
+//
+//		Robot robot = new Robot(); 
+//		robot.setAutoDelay(2000);
+//		
+//		robot.keyPress(KeyEvent.VK_META);
+//
+//		robot.keyPress(KeyEvent.VK_TAB);
+//
+//		robot.keyRelease(KeyEvent.VK_META);
+//
+//		robot.keyRelease(KeyEvent.VK_TAB);
+//
+//		robot.delay(500);
+//		
+//		robot.keyPress(KeyEvent.VK_META);
+//		 
+//		robot.keyPress(KeyEvent.VK_SHIFT);
+//		 
+//		robot.keyPress(KeyEvent.VK_G);
+//		 
+//		robot.keyRelease(KeyEvent.VK_META);
+//		 
+//		robot.keyRelease(KeyEvent.VK_SHIFT);
+//		 
+//		robot.keyRelease(KeyEvent.VK_G);
+//		
+//		robot.keyPress(KeyEvent.VK_META);
+//
+//		robot.keyPress(KeyEvent.VK_V);
+//
+//		robot.keyRelease(KeyEvent.VK_META);
+//
+//		robot.keyRelease(KeyEvent.VK_V);
+//
+//		//Press Enter key to close the Goto window and Upload window
+//
+//		robot.keyPress(KeyEvent.VK_ENTER);
+//
+//		robot.keyRelease(KeyEvent.VK_ENTER);
+//
+//		robot.delay(500);
+//
+//		robot.keyPress(KeyEvent.VK_ENTER);
+//
+//		robot.keyRelease(KeyEvent.VK_ENTER);
+//		
+//		
+		//element.sendKeys("/Users/bhirani/selenium.jpeg");
+		 
+//       element.click();		
+//		JavascriptExecutor js = (JavascriptExecutor) driver;  
+//		WebElement chooseFile = (WebElement) js.executeScript("document.querySelector(\"div[class='a1 aaA aMZ']\").click();");
+//		Thread.sleep(2000);
+//		chooseFile.sendKeys("/Users/bhirani/selenium.jpeg");
+//		JavascriptExecutor js = (JavascriptExecutor) driver;
+//		js.executeScript("document.querySelector(\"div[class='a1 aaA aMZ']\").click();");
+//		
+//		Thread.sleep(5000);
+//		
+//		Robot robot = new Robot(); 
+//		robot.setAutoDelay(2000);
+//		StringSelection stringSelection = new StringSelection("selenium.jpeg");
+//		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
+//		
+//		robot.setAutoDelay(3000);
+//
+//		robot.keyPress(KeyEvent.VK_META);
+//		robot.keyPress(KeyEvent.VK_V);
+//		
+//		robot.keyRelease(KeyEvent.VK_META);
+//		robot.keyRelease(KeyEvent.VK_V);
+//		
+//		robot.setAutoDelay(3000);
+//		
+//		robot.keyPress(KeyEvent.VK_ENTER);
+//		robot.keyRelease(KeyEvent.VK_ENTER);
+////		
+//		Thread.sleep(2000);
+				
+
+		
+
+	}
+
+
+}
