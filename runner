@@ -1,0 +1,6 @@
+@RunWith(Cucumber.class)
+@CucumberOptions(
+		
+		features = "/Users/bhirani/Downloads/wsp/practical/src/main/java/Features/SendEmailWithAttachment.feature",
+		glue = "stepDefination",
+		format = {"pretty","html:target/cucumber-html/index.html"}
